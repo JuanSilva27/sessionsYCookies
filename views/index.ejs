@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body style="background-color: <%= locals.bgColor ? bgColor : null %>; ">
+
+    <% if(locals.name){ %>
+      <div>
+        <h1>Hola <%= name %>, elegiste el color: <%= color %>, tu mail es: <%= mail %> y tu edad es: <%= age %>   </h1>
+      </div>
+    <% } else { %>
+    <main>
+      <h1>Bienvenido</h1>
+      <form action="/" method="POST">
+        <label for="name"  >Ingrese su Nombre:</label>
+        <input type="text" id="name" name="name" value=<%= locals.old && old.name? old.name : null %>> <br>
+        <small><%= locals.errors && errors.name ? errors.name.msg : null %> </small> <br>
+
+        <select name="color" id="color" >
+          <option value="" <%= locals.old && old.color=== ""? "selected" : null %> hidden>Seleccione un color</option>
+          <option value="red"<%= locals.old && old.color=== "red"? "selected" : null %>>Rojo</option>
+          <option value="blue"<%= locals.old && old.color=== "blue"? "selected" : null %>>Azul</option>
+          <option value="yellow"<%= locals.old && old.color=== "yellow"? "selected" : null %>>Amarillo</option>
+        </select> <br>
+        <small><%= locals.errors && errors.color ? errors.color.msg : null %> </small> <br> 
+
+        <label for="recordar">Recordar Color</label>
+        <input type="checkbox" id="recordar" name="recordar"><br>
+
+        <label for="mail">Ingrese su E-mail:</label>
+        <input type="email" id="mail" name="mail" value=<%= locals.old && old.mail? old.mail : null %>> <br>
+        <small><%= locals.errors && errors.mail ? errors.mail.msg : null %> </small> <br>
+
+        <label for="age">Ingrese su Edad:</label>
+        <input type="text" id="age" name="age" value=<%= locals.old && old.age? old.age : null %>> <br>
+        <small><%= locals.errors && errors.age ? errors.age.msg : null %> </small> <br>
+
+        <button type="submit">Enviar</button>
+        <a href="/destroy">Olvidar Color</a>
+      </form>
+      <% } %> 
+    </main>
+  </body>
+</html>
